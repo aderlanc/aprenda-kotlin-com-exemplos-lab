@@ -9,6 +9,16 @@ class Formacao(val nome: String, val nivel:Nivel, var conteudos: List<ConteudoEd
 
     fun matricular(usuario: Usuario) {
         inscritos.add(usuario)
+        println("Usuário ${usuario.nome} matriculado com sucesso!!!")
+    }
+    
+    fun detalhes() {
+        var duracaoTotal = 0
+        conteudos.forEach { duracaoTotal += it.duracao }
+        println("Formação: $nome, Nível: $nivel, com duração total de $duracaoTotal minutos.")
+        println("Conteúdos:")
+        conteudos.forEach { println("  -> ${it.nome} - ${it.duracao} minutos") }
+        println("")
     }
 }
 
@@ -22,9 +32,10 @@ fun main() {
     val nivel = Nivel.BASICO
     
     val formacao = Formacao("Kotlin para backend", nivel, listOf(conteudo1, conteudo2))
-
+	
+    formacao.detalhes()
+    
     formacao.matricular(usuario1)
     formacao.matricular(usuario2)
-
-    println("Usuários inscritos na formação ${formacao.nome} de nível $nivel: ${formacao.inscritos}")
+    
 }
